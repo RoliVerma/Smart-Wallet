@@ -33,6 +33,7 @@ public class NoteRepository {
         return allNotes;
     }
 
+
     public static class InsertNoteAsyncTask extends AsyncTask<Note,Void,Void>{
         private NoteDao noteDao;
 
@@ -41,8 +42,8 @@ public class NoteRepository {
         }
 
         @Override
-        protected Void doInBackground(Note... notes) {
-            noteDao.insert(notes[0]);
+        protected Void doInBackground(Note... monies) {
+            noteDao.insert(monies[0]);
             return null;
         }
     }
@@ -54,8 +55,8 @@ public class NoteRepository {
         }
 
         @Override
-        protected Void doInBackground(Note... notes) {
-            noteDao.update(notes[0]);
+        protected Void doInBackground(Note... monies) {
+            noteDao.update(monies[0]);
             return null;
         }
     }
@@ -67,8 +68,8 @@ public class NoteRepository {
         }
 
         @Override
-        protected Void doInBackground(Note... notes) {
-            noteDao.delete(notes[0]);
+        protected Void doInBackground(Note... monies) {
+            noteDao.delete(monies[0]);
             return null;
         }
     }
@@ -86,5 +87,6 @@ public class NoteRepository {
         }
 
     }
+
 
 }

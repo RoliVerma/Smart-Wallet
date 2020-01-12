@@ -7,8 +7,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import org.w3c.dom.Node;
-
 import java.util.List;
 
 @Dao
@@ -26,6 +24,19 @@ public interface NoteDao {
     @Query("DELETE FROM note_table")
     void deleteAllNotes();
 
-    @Query("SELECT * FROM note_table ORDER BY priority DESC")
+    @Query("SELECT * FROM note_table ORDER BY date ASC")
     LiveData<List<Note>> getAllNotes();
+
+    @Query("SELECT COUNT(*) FROM note_table where type='Spent' ")
+    int countSpent();
+
+    @Query("SELECT COUNT(*) FROM note_table where type='Lent' ")
+    int countLent();
+
+    @Query("SELECT COUNT(*) FROM note_table where type='Borrowed' ")
+    int countBorrowed();
+
+    @Query("SELECT COUNT(*) FROM note_table where type='Received' ")
+    int countReceived();
 }
+

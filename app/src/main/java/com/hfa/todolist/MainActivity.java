@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
         noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override
-            public void onChanged(List<Note> notes) {
-                adapter.submitList(notes);
+            public void onChanged(List<Note> monies) {
+                adapter.submitList(monies);
             }
         });
 
@@ -76,10 +76,11 @@ public class MainActivity extends AppCompatActivity {
              @Override
              public void onItemClick(Note note) {
                  Intent intent = new Intent(MainActivity.this, AddEditNoteActivity.class);
-                 intent.putExtra(AddEditNoteActivity.EXTRA_ID,note.getId());
-                 intent.putExtra(AddEditNoteActivity.EXTRA_TITLE,note.getTitle());
-                 intent.putExtra(AddEditNoteActivity.EXTRA_DESCRIPTION,note.getDescription());
-                 intent.putExtra(AddEditNoteActivity.EXTRA_PRIORITY,note.getPriority());
+                 intent.putExtra(AddEditNoteActivity.EXTRA_ID, note.getId());
+                 intent.putExtra(AddEditNoteActivity.EXTRA_TYPE,note.getType());
+                 intent.putExtra(AddEditNoteActivity.EXTRA_TITLE, note.getTitle());
+                 intent.putExtra(AddEditNoteActivity.EXTRA_DESCRIPTION, note.getDescription());
+                 intent.putExtra(AddEditNoteActivity.EXTRA_PRIORITY, note.getPriority());
                  startActivityForResult(intent,EDIT_NOTE_REQUEST);
              }
          });
@@ -92,9 +93,11 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode==ADD_NOTE_REQUEST && resultCode==RESULT_OK){//everything went fine and so save the note
             String title=data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE);
             String description=data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION);
+            String type=data.getStringExtra(AddEditNoteActivity.EXTRA_TYPE);
+            String date= data.getStringExtra(AddEditNoteActivity.EXTRA_DATE);
             int priority=data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY,1);
 
-            Note note = new Note(title,description,priority);
+            Note note = new Note(title,description,type,priority,date);
             noteViewModel.insert(note);
 
             Toast.makeText(this,"NOTE SAVED",Toast.LENGTH_LONG).show();
@@ -108,9 +111,11 @@ public class MainActivity extends AppCompatActivity {
 
             String title=data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE);
             String description=data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION);
+            String type=data.getStringExtra(AddEditNoteActivity.EXTRA_TYPE);
+            String date= data.getStringExtra(AddEditNoteActivity.EXTRA_DATE);
             int priority=data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY,1);
 
-            Note note = new Note(title, description, priority);
+            Note note = new Note(title, description,type, priority,date);
             note.setId(id);
             noteViewModel.update(note);
             Toast.makeText(this," NOTE UPDATED",Toast.LENGTH_LONG).show();
@@ -135,6 +140,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.delete_all_menu :
                 noteViewModel.deleteAllNotes();
                 return  true;
+            case R.id.analysis :
+                Intent intent = new Intent(this,MPChartActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

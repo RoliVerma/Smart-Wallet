@@ -31,6 +31,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
+    //for mpAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.android.support:cardview-v7'

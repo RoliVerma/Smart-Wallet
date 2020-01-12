@@ -8,6 +8,8 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+
+//all the async functions in noteRepository are put in another function here
 public class NoteViewModel extends AndroidViewModel {
     private NoteRepository noteRepository;
     private LiveData<List<Note>> allNotes;
@@ -33,4 +35,5 @@ public class NoteViewModel extends AndroidViewModel {
     public LiveData<List<Note>> getAllNotes(){
        return noteRepository.getAllNotes();
     }
+
 }

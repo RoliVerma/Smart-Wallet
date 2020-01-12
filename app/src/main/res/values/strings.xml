@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">TODOList</string>
+    <string name="app_name">Smart_Wallet</string>
+    <string-array name="spinner_money_type">
+        <item>Received</item>
+        <item>Spent</item>
+        <item>Borrowed</item>
+        <item>Lent</item>
+    </string-array>
 </resources>

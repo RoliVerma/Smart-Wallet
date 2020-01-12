@@ -4,13 +4,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.room.Database;
-import androidx.room.Entity;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import java.util.List;
-
-@Database(entities = {Note.class}, version =1, exportSchema = false)
+@Database(entities = {Note.class}, version =2, exportSchema = false)
 public abstract class NoteDatabase extends RoomDatabase {
 
     //singleton
@@ -27,14 +24,15 @@ public abstract class NoteDatabase extends RoomDatabase {
         return instance;
     }
 
+//for testing purpose only
     public static class PopulateInit extends AsyncTask<Void,Void,Void>{
         private NoteDao noteDao;
 
         @Override
         protected Void doInBackground(Void... voids) {
-            noteDao.insert(new Note("Title1","This is first",1));
-            noteDao.insert(new Note("Title2","This is second",2));
-            noteDao.insert(new Note("Title3","This is third",3));
+            noteDao.insert(new Note("Title1","This is first","Received",2,"11/12/2020"));
+            noteDao.insert(new Note("Title2","This is second","Spent",10,"11/10/2020"));
+            noteDao.insert(new Note("Title3","This is third","Borrowed",3,"13/04/2019"));
             return null;
         }
     }
